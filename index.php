@@ -14,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<body style="background-color: #f5deb3;">
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Organizare Evenimente</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,30 +24,27 @@ session_start();
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Acasa <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categorii
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Botez</a>
-          <a class="dropdown-item" href="#">Nunta</a>
+          <a class="dropdown-item" href="#Botez">Botez</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Aniversari</a>
+          <a class="dropdown-item" href="#Nunta">Nunta</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#Aniversare">Aniversare</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="#Contact">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#Despre noi">Despre noi</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 
@@ -70,8 +68,143 @@ session_start();
           </li>";
         }
         ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </li>
+        </ul>
+      </nav>
+
+      <div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/botez1.jpg" class="d-block w-100" alt="Botez">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Botez</h5>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="images/nunta1.jpg" class="d-block w-100" alt="Nunta">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Nunta</h5>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="images/majorat1.jpg" class="d-block w-100" alt="Aniversare">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Aniversare</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="botez.php">
+<section class="my-4" id="Botez">
+  <div class="py-4">
+    <h2 class="text-center">Botez</h2>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/botez2.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/botez3.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/botez4.jpg" class="img-fluid pb-3">
+      </div>
+      </div>
+      </div>
+  </section>
+      </a>
+    <a href="nunta.php">
+  <section class="my-4" id="Nunta">
+  <div class="py-4">
+    <h2 class="text-center">Nunta</h2>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/nunta2.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/nunta3.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/nunta4.jpg" class="img-fluid pb-3">
+      </div>
+      </div>
+      </div>
+  </section>
+      </a>
+  <a href="aniversare.php">
+  <section class="my-4" id="Aniversare">
+  <div class="py-4">
+    <h2 class="text-center">Aniversare</h2>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/aniversare1.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/majorat2.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/majorat3.jpg" class="img-fluid pb-3">
+      </div>
+      </div>
+      </div>
+  </section>
+      </a>
+      <a id="Contact">
+  <section class="my-4">
+  <div class="py-4">
+    <h2 class="text-center">Contact</h2>
+      </div>
+
+      <div class="w-50 m-auto">
+          <div class="form-group">
+            <label>Nume:</label>
+          </div>
+      <div class="form-group">
+            <label>Email:</label>
+      </div>
+      <div class="form-group">
+            <label>Numar de telefon:</label>
+      </div>
+      <div class="form-group">
+            <label>Instagram:</label>
+      </div>
+      <div class="form-group">
+            <label>Facebook:</label>
+      </div>
+    </div>
+  </section>
+      </a>
+      <a id="Despre noi">
+  <section class="my-4">
+  <div class="py-4">
+    <h2 class="text-center">Despre noi</h2>
+  </div>
+  <div class="container-fluid">
+    <h3 class="text-center">Cristi</h3> <br>
+    <p class="text-center"><b>Sunt o firma</b></p>
+      </div>
+  </section>
+      </a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+  $('#carouselExampleCaptions').carousel({
+    interval: 3000 // 5000 milisecunde = 5 secunde
+  });
+});
+</script>
 </body>
 </html>
