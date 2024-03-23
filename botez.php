@@ -20,23 +20,22 @@ if ($_SESSION['user_name'] == 'admin') {
     <link rel="stylesheet" href="css/style.css">
     <link href='fullcalendar/main.css' rel='stylesheet' />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
-    <!-- CSS for full calender -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
-<!-- JS for jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- JS for full calender -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-<!-- bootstrap css and js -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
+<body style="background-color: #FFFFCC;">
+<body>
 <body>
     <section class="information">
     <div class="container">
         <h2>Informatii despre Botez</h2>
         <?php if ($is_admin): ?>
             <button id="editButton" style="outline: none; border: none;">Editează</button>
+            <a href="numar_botez.php" style ="outline: none; border:none" class="btn btn-sm btn-primary">Detalii confirmari</a>
         <?php endif; ?>
         <div id="editContent" contenteditable="false">
             <?php
@@ -81,10 +80,18 @@ if ($_SESSION['user_name'] == 'admin') {
     <section class="gallery">
         <div class="container">
             <h2>Galerie foto</h2>
-            <div class="photos">
-                <img src="foto1.jpg" alt="Foto 1">
-                <img src="foto2.jpg" alt="Foto 2">
+            <div class="container-fluid">
+            <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/botezz1.jpg" class="img-fluid pb-3">
             </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/botezz2.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/botezz3.jpg" class="img-fluid pb-3">
+            </div>
+        </div>
         </div>
     </section>
 
@@ -92,14 +99,13 @@ if ($_SESSION['user_name'] == 'admin') {
         <div class="container">
             <h2>Rezervari</h2>
             <div id="calendar"></div>
-            <button id="reserveButton">Rezervă eveniment</button>
         </div>
         <!-- Start popup dialog box -->
 <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modalLabel">Add New Event</h5>
+				<h5 class="modal-title" id="modalLabel">Adaugati un nou eveniment</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
@@ -109,29 +115,42 @@ if ($_SESSION['user_name'] == 'admin') {
 					<div class="row">
 						<div class="col-sm-12">  
 							<div class="form-group">
-							  <label for="event_name">Event name</label>
-							  <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Enter your event name">
+							  <label for="event_name">Numele evenimentului</label>
+							  <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Introduceti numele evenimentului">
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-6">  
 							<div class="form-group">
-							  <label for="event_start_date">Event start</label>
-							  <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date">
+							  <label for="event_start_date">Inceputul evenimentului</label>
+							  <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Data de inceput">
 							 </div>
 						</div>
 						<div class="col-sm-6">  
 							<div class="form-group">
-							  <label for="event_end_date">Event end</label>
-							  <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
+							  <label for="event_end_date">Sfarsitul evenimentului</label>
+							  <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Data de final">
 							</div>
 						</div>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="event_hall">Numele salii</label>
+                            <input type="text" name="event_hall" id="event_hall" class="form-control" placeholder="Numele salii">
+                        </div>  
 					</div>
+                    <p class="text-muted">Salile disponibile sunt: Colloseum, Venue, Galla</p>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="event_number">Numarul de telefon</label>
+                            <input type="text" name="event_number" id="event_number" class="form-control" placeholder="Numar de telefon">
+                        </div>  
+					</div>
+                    <p class="text-muted">Dupa ce realizati rezervarea, veti fi sunat de un operator pentru confirmare.</p>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="save_event()">Save Event</button>
+				<button type="button" class="btn btn-primary" onclick="save_botez_calendar()">Salvati evenimentul</button>
 			</div>
 		</div>
 	</div>
@@ -145,7 +164,7 @@ $(document).ready(function() {
 function display_events() {
 	var events = new Array();
 $.ajax({
-    url: 'display_event.php',  
+    url: 'display_botez.php',  
     dataType: 'json',
     success: function (response) {
          
@@ -167,12 +186,18 @@ $.ajax({
         selectable: true,
 		selectHelper: true,
         select: function(start, end) {
-				alert(start);
-				alert(end);
-				$('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
-				$('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
-				$('#event_entry_modal').modal('show');
-			},
+            var eventsInDay = $('#calendar').fullCalendar('clientEvents', function(event) {
+                        return moment(event.start).isSame(start, 'day');
+                    });
+
+                    if (eventsInDay.length >= 3) {
+                        alert("Nu mai puteți rezerva un eveniment în această zi, deoarece există deja 3 evenimente programate.");
+                    } else {
+                        $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
+                        $('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
+                        $('#event_entry_modal').modal('show');
+                    }
+                },
 
         events: events,
 	    eventRender: function(event, element, view) { 
@@ -188,21 +213,23 @@ $.ajax({
 	});//end ajax block	
 }
 
-function save_event()
+function save_botez_calendar()
 {
 var event_name=$("#event_name").val();
 var event_start_date=$("#event_start_date").val();
 var event_end_date=$("#event_end_date").val();
-if(event_name=="" || event_start_date=="" || event_end_date=="")
+var event_hall=$("#event_hall").val();
+var event_number=$("#event_number").val();
+if(event_name=="" || event_start_date=="" || event_end_date=="" || event_hall=="" || event_number=="")
 {
-alert("Please enter all required details.");
+alert("Introduceti toate detaliile.");
 return false;
 }
 $.ajax({
- url:"save_event.php",
+ url:"save_botez_calendar.php",
  type:"POST",
  dataType: 'json',
- data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date},
+ data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date,event_hall:event_hall,event_number:event_number},
  success:function(response){
    $('#event_entry_modal').modal('hide');  
    if(response.status == true)

@@ -103,17 +103,18 @@ session_start();
 <section class="my-4" id="Botez">
   <div class="py-4">
     <h2 class="text-center">Botez</h2>
+    <h2 class="text-center" style="font-size: smaller; color: black; text-decoration: none;">Pentru mai multe detalii, faceti click oriunde in sectiunea "Botez" dupa ce ati intrat in contul dumeavoastra</h2>
       </div>
       <div class="container-fluid">
         <div class="row">
       <div class="col-lg-4 col-md-4 col-12">
-        <img src="images/botez2.jpg" class="img-fluid pb-3">
+        <img src="images/botez2nou.jpg" class="img-fluid pb-3">
       </div>
       <div class="col-lg-4 col-md-4 col-12">
         <img src="images/botez3.jpg" class="img-fluid pb-3">
       </div>
       <div class="col-lg-4 col-md-4 col-12">
-        <img src="images/botez4.jpg" class="img-fluid pb-3">
+        <img src="images/botez4nou.jpg" class="img-fluid pb-3">
       </div>
       </div>
       </div>
@@ -123,6 +124,7 @@ session_start();
   <section class="my-4" id="Nunta">
   <div class="py-4">
     <h2 class="text-center">Nunta</h2>
+    <h2 class="text-center" style="font-size: smaller; color: black; text-decoration: none;">Pentru mai multe detalii, faceti click oriunde in sectiunea "Nunta" dupa ce ati intrat in contul dumeavoastra</h2>
       </div>
       <div class="container-fluid">
         <div class="row">
@@ -130,7 +132,7 @@ session_start();
         <img src="images/nunta2.jpg" class="img-fluid pb-3">
       </div>
       <div class="col-lg-4 col-md-4 col-12">
-        <img src="images/nunta3.jpg" class="img-fluid pb-3">
+        <img src="images/nunta3nou.jpg" class="img-fluid pb-3">
       </div>
       <div class="col-lg-4 col-md-4 col-12">
         <img src="images/nunta4.jpg" class="img-fluid pb-3">
@@ -143,6 +145,7 @@ session_start();
   <section class="my-4" id="Aniversare">
   <div class="py-4">
     <h2 class="text-center">Aniversare</h2>
+    <h2 class="text-center" style="font-size: smaller; color: black; text-decoration: none;">Pentru mai multe detalii, faceti click oriunde in sectiunea "Aniversare" dupa ce ati intrat in contul dumeavoastra</h2>
       </div>
       <div class="container-fluid">
         <div class="row">
@@ -153,7 +156,7 @@ session_start();
         <img src="images/majorat2.jpg" class="img-fluid pb-3">
       </div>
       <div class="col-lg-4 col-md-4 col-12">
-        <img src="images/majorat3.jpg" class="img-fluid pb-3">
+        <img src="images/majorat3nou.jpg" class="img-fluid pb-3">
       </div>
       </div>
       </div>
@@ -167,19 +170,19 @@ session_start();
 
       <div class="w-50 m-auto">
           <div class="form-group">
-            <label>Nume:</label>
+            <label>Nume: Imperial Events</label>
           </div>
       <div class="form-group">
-            <label>Email:</label>
+            <label>Email: imperialevents@yahoo.com</label>
       </div>
       <div class="form-group">
-            <label>Numar de telefon:</label>
+            <label>Numar de telefon: 0722343253</label>
       </div>
       <div class="form-group">
-            <label>Instagram:</label>
+            <label>Instagram: https://www.instagram.com/imperialevents/</label>
       </div>
       <div class="form-group">
-            <label>Facebook:</label>
+            <label>Facebook: https://www.facebook.com/ImperialEvents</label>
       </div>
     </div>
   </section>
@@ -190,8 +193,10 @@ session_start();
     <h2 class="text-center">Despre noi</h2>
   </div>
   <div class="container-fluid">
-    <h3 class="text-center">Cristi</h3> <br>
-    <p class="text-center"><b>Sunt o firma</b></p>
+    <h3 class="text-center">Imperial Events</h3> <br>
+    <p class="text-center"><b>Suntem o firma de 10 ani pe piata care se poate ocupa de realizarea evenimentului dumneavoastra. Ne ocupam de rezervare, meniuri , decor, muzica, fotografi, 
+      tort si orice aveti nevoie in plus. Pentru mai multe detalii, puteti accesa fiecare sectiune dupa ce va creati un cont. Pentru detalii suplimentare,
+       aveti toate datele noastre de contact in sectiunea "Contact" </b></p>
       </div>
   </section>
       </a>
