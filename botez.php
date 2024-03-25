@@ -1,11 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_name'])) {
-    header("Location: ./users_area/user_login.php");
-    exit();
-}
-$is_admin = false;
-if ($_SESSION['user_name'] == 'admin') {
+
+$is_admin = false; 
+
+if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
     $is_admin = true;
 }
 ?>
@@ -26,6 +24,7 @@ if ($_SESSION['user_name'] == 'admin') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="background-color: #FFFFCC;">
 <body>
@@ -93,8 +92,10 @@ if ($_SESSION['user_name'] == 'admin') {
             </div>
         </div>
         </div>
-    </section>
-
+</section>
+</section>
+<script>
+</script>
     <section class="rezerve">
         <div class="container">
             <h2>Rezervari</h2>
@@ -139,7 +140,19 @@ if ($_SESSION['user_name'] == 'admin') {
                             <input type="text" name="event_hall" id="event_hall" class="form-control" placeholder="Numele salii">
                         </div>  
 					</div>
-                    <p class="text-muted">Salile disponibile sunt: Colloseum, Venue, Galla</p>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="event_type">Tipul evenimentului</label>
+                                <select name="event_type" id="event_type" class="form-control">
+                                    <option value="public">Privat</option>
+                                    <option value="privat">Public</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted">Salile disponibile sunt: Colloseum, Venue, Galla
+                    </p>
                         <div class="col-sm-6">
                         <div class="form-group">
                             <label for="event_number">Numarul de telefon</label>
@@ -156,6 +169,7 @@ if ($_SESSION['user_name'] == 'admin') {
 	</div>
 </div>
 <!-- End popup dialog box -->
+
 <script>
 $(document).ready(function() {
 	display_events();
@@ -175,7 +189,7 @@ $.ajax({
             title: result[i].title,
             start: result[i].start,
             end: result[i].end,
-            color: result[i].color,
+            color: '#7FFF7F',
             url: result[i].url
         }); 	
     })
@@ -186,12 +200,17 @@ $.ajax({
         selectable: true,
 		selectHelper: true,
         select: function(start, end) {
+                var isUserLoggedIn = "<?php echo isset($_SESSION['user_name']) ? 'true' : 'false'; ?>";
+                if (isUserLoggedIn !== 'true') {
+                swal("Trebuie să fiți autentificat pentru a face o rezervare.");
+                return;
+                }
             var eventsInDay = $('#calendar').fullCalendar('clientEvents', function(event) {
                         return moment(event.start).isSame(start, 'day');
                     });
 
                     if (eventsInDay.length >= 3) {
-                        alert("Nu mai puteți rezerva un eveniment în această zi, deoarece există deja 3 evenimente programate.");
+                        swal("Sunt deja 3 evenimente programate in aceasta zi");
                     } else {
                         $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
                         $('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
@@ -202,7 +221,7 @@ $.ajax({
         events: events,
 	    eventRender: function(event, element, view) { 
             element.bind('click', function() {
-					alert('Evenimentul este rezervat');
+					swal('Evenimentul este rezervat');
 				});
     	}
 		}); //end fullCalendar block	
@@ -220,16 +239,17 @@ var event_start_date=$("#event_start_date").val();
 var event_end_date=$("#event_end_date").val();
 var event_hall=$("#event_hall").val();
 var event_number=$("#event_number").val();
-if(event_name=="" || event_start_date=="" || event_end_date=="" || event_hall=="" || event_number=="")
+var event_type=$("#event_type").val()
+if(event_name=="" || event_start_date=="" || event_end_date=="" || event_hall=="" || event_number=="" || event_type=="")
 {
-alert("Introduceti toate detaliile.");
+swal("Introduceti toate detaliile.");
 return false;
 }
 $.ajax({
  url:"save_botez_calendar.php",
  type:"POST",
  dataType: 'json',
- data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date,event_hall:event_hall,event_number:event_number},
+ data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date,event_hall:event_hall,event_number:event_number,event_type:event_type},
  success:function(response){
    $('#event_entry_modal').modal('hide');  
    if(response.status == true)

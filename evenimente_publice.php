@@ -1,5 +1,7 @@
 <?php
+include('includes/connect.php');
 session_start();
+
 $is_admin = false; 
 
 if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
@@ -9,7 +11,7 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Nunta</title>
+    <title>Evenimente publice</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +19,7 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
     <link rel="stylesheet" href="css/style.css">
     <link href='fullcalendar/main.css' rel='stylesheet' />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
@@ -27,16 +29,17 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
 </head>
 <body style="background-color: #FFFFCC;">
 <body>
+<body>
     <section class="information">
     <div class="container">
-        <h2>Informatii despre Nunta</h2>
+        <h2>Informatii despre evenimente publice</h2>
         <?php if ($is_admin): ?>
             <button id="editButton" style="outline: none; border: none;">Editează</button>
-            <a href="numar_nunta.php" style ="outline: none; border:none" class="btn btn-sm btn-primary">Detalii confirmari</a>
+            <a href="numar_botez.php" style ="outline: none; border:none" class="btn btn-sm btn-primary">Detalii confirmari</a>
         <?php endif; ?>
         <div id="editContent" contenteditable="false">
             <?php
-            $config_content = file_get_contents('nuntainfo.txt');
+            $config_content = file_get_contents('evenimenteinfo.txt');
             echo $config_content;
             ?>
         </div>
@@ -62,7 +65,7 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
 
         function saveChanges(content) {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "save_nunta.php", true);
+            xhr.open("POST", "save_botez.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -80,23 +83,63 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
             <div class="container-fluid">
             <div class="row">
             <div class="col-lg-4 col-md-4 col-12">
-            <img src="images/nuntaa1.jpg" class="img-fluid pb-3">
+            <img src="images/botezz1.jpg" class="img-fluid pb-3">
             </div>
             <div class="col-lg-4 col-md-4 col-12">
-            <img src="images/nuntaa2.jpg" class="img-fluid pb-3">
+            <img src="images/botezz2.jpg" class="img-fluid pb-3">
             </div>
             <div class="col-lg-4 col-md-4 col-12">
-            <img src="images/nuntaa3.jpg" class="img-fluid pb-3">
+            <img src="images/botezz3.jpg" class="img-fluid pb-3">
             </div>
         </div>
         </div>
     </section>
-
     <section class="rezerve">
         <div class="container">
             <h2>Rezervari</h2>
             <div id="calendar"></div>
+            <div class="container">
+        <form method ="post">
+            <input type="text" placeholder="Scrieti numele evenimentului" name="search">
+            <button class="btn btn-dark" name="submit">Cautati</button>
+        </form>
+    </div>
         </div>
+        <div class="container my-5">
+            <table class="table">
+                <?php
+                if(isset($_POST['submit'])){
+                    $search=$_POST['search'];
+                    $sql="Select * from `calendar_botez_master` where event_name='$search' and event_type='public'";
+                    $result=mysqli_query($con,$sql);
+                    if ($result) {
+                        if (mysqli_num_rows($result) > 0) {
+                        echo '<thead>
+                                <tr>
+                                    <th>Nume</th>
+                                    <th>Data de inceput</th>
+                                    <th>Data de final</th>
+                                    <th>Locatie</th>
+                                </tr>
+                              </thead>';
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tbody>
+                                        <tr>
+                                            <td>' . $row['event_name'] . '</td>
+                                            <td>' . $row['event_start_date'] . '</td>
+                                            <td>' . $row['event_end_date'] . '</td>
+                                            <td>' . $row['event_hall'] . '</td>
+                                        </tr>
+                                      </tbody>';
+                            }
+                        } 
+                        else {
+                            echo '<h2 class="text">Datele nu au fost gasite</h2>';
+                        }
+                    }
+                }
+                ?>
+                </div>
         <!-- Start popup dialog box -->
 <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md" role="document">
@@ -155,11 +198,10 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
                         </div>  
 					</div>
                     <p class="text-muted">Dupa ce realizati rezervarea, veti fi sunat de un operator pentru confirmare.</p>
-					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="save_nunta_calendar()">Salvati evenimentul</button>
+				<button type="button" class="btn btn-primary" onclick="save_evenimente_calendar()">Salvati evenimentul</button>
 			</div>
 		</div>
 	</div>
@@ -173,7 +215,7 @@ $(document).ready(function() {
 function display_events() {
 	var events = new Array();
 $.ajax({
-    url: 'display_nunta.php',  
+    url: 'display_eveniment.php',  
     dataType: 'json',
     success: function (response) {
          
@@ -227,7 +269,7 @@ $.ajax({
 	});//end ajax block	
 }
 
-function save_nunta_calendar()
+function save_evenimente_calendar()
 {
 var event_name=$("#event_name").val();
 var event_start_date=$("#event_start_date").val();
@@ -241,7 +283,7 @@ swal("Introduceti toate detaliile.");
 return false;
 }
 $.ajax({
- url:"save_nunta_calendar.php",
+ url:"save_evenimente_calendar.php",
  type:"POST",
  dataType: 'json',
  data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date,event_hall:event_hall,event_number:event_number,event_type:event_type},
@@ -265,6 +307,7 @@ $.ajax({
 return false;
 }
 </script>
+    </section>
     <script src='fullcalendar/main.js'></script>
     <script src='fullcalendar/locales-all.js'></script>
     <script src="fullcalendar/calendar-init.js"></script>

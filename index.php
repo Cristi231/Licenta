@@ -162,6 +162,27 @@ session_start();
       </div>
   </section>
       </a>
+      <a href="evenimente_publice.php">
+  <section class="my-4" id="Evenimente publice">
+  <div class="py-4">
+    <h2 class="text-center">Evenimente publice</h2>
+    <h2 class="text-center" style="font-size: smaller; color: black; text-decoration: none;">Pentru mai multe detalii, faceti click oriunde in sectiunea "Aniversare" dupa ce ati intrat in contul dumeavoastra</h2>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/aniversare1.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/majorat2.jpg" class="img-fluid pb-3">
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <img src="images/majorat3nou.jpg" class="img-fluid pb-3">
+      </div>
+      </div>
+      </div>
+  </section>
+      </a>
       <a id="Contact">
   <section class="my-4">
   <div class="py-4">

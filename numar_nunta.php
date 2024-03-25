@@ -23,14 +23,14 @@ if ($_SESSION['user_name'] == 'admin') {
     }
 
     // Interogare pentru a obține detaliile din baza de date
-    $sql = "SELECT * FROM calendar_nunta_master"; // Înlocuiește 'numele_tabelei' cu numele tablei reale din baza de date
+    $sql = "SELECT * FROM calendar_botez_master"; // Înlocuiește 'numele_tabelei' cu numele tablei reale din baza de date
 
     $result = $conn->query($sql);
 
     // Afișează detaliile
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo "Rezervare : " . $row["event_name"]. " - " . $row["event_start_date"]. " - " . $row["event_end_date"]." - " . $row["event_hall"]." - " . $row["event_number"]."<br>";
+            echo "Rezervare : " . $row["event_name"]. " - " . $row["event_start_date"]. " - " . $row["event_end_date"]." - " . $row["event_hall"]." - " . $row["event_number"]."- " . $row["event_type"]."<br>";
         }
     } else {
         echo "Nu sunt detalii disponibile.";
