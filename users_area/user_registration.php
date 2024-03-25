@@ -9,6 +9,7 @@ session_start();?>
     <title>Inregistrare</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     <div class="container-fluid my-3">
@@ -66,16 +67,20 @@ if(isset($_POST['user_register'])){
     $result=mysqli_query($con,$select_query);
     $rows_count=mysqli_num_rows($result);
     if($rows_count>0){
-        echo "<script>alert('Numele sau adresa de email deja exista')</script>";
+        echo "<script>swal('Numele sau adresa de email deja exista')</script>";
     }else if($user_password!=$conf_user_password){
-        echo "<script>alert('Parolele nu se potrivesc')</script>";
+        echo "<script>swal('Parolele nu se potrivesc')</script>";
     }
     
     else{
     $insert_query="insert into `user_table`(user_name,user_email,user_password,user_address,user_mobile) values ('$user_username','$user_email','$hash_password','$user_address','$user_contact')";
     $sql_execute=mysqli_query($con,$insert_query);
     if($sql_execute){
-        echo"<script>alert('Datele au fost introduse cu succes')</script>";
+        echo"<script>swal('Datele au fost introduse cu succes')
+        setTimeout(function(){
+            window.open('user_login.php', '_self');
+        }, 1000);
+        </script>";
     }else{
         die(mysqli_error($con));
     }

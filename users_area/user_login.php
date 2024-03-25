@@ -9,6 +9,7 @@ session_start();?>
     <title>Logare</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
     <style>
@@ -55,14 +56,17 @@ session_start();?>
                 $_SESSION['user_name']=$user_username;
                 if(password_verify($user_password,$row_data['user_password'])){
                     $_SESSION['user_name']=$user_username;
-                    echo "<script>alert('Logare cu succes')</script>";
-                    echo "<script>window.open('../index.php','_self')</script>";
+                    echo "<script>swal('Logare cu succes')
+                    setTimeout(function(){
+                        window.open('../index.php', '_self');
+                    }, 1000);
+                    </script>";
                 }else{
-                        echo "<script>alert('Numele sau parola sunt gresite')</script>";
+                        echo "<script>swal('Numele sau parola sunt gresite')</script>";
                     }
                 }
         else{
-            echo "<script>alert('Numele sau parola sunt gresite')</script>";
+            echo "<script>swal('Numele sau parola sunt gresite')</script>";
         }
     }
 ?>
