@@ -119,6 +119,8 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
                                     <th>Nume</th>
                                     <th>Data de inceput</th>
                                     <th>Data de final</th>
+                                    <th>Ora inceperii</th>
+                                    <th>Ora terminarii</th>
                                     <th>Locatie</th>
                                 </tr>
                               </thead>';
@@ -128,6 +130,8 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
                                             <td>' . $row['event_name'] . '</td>
                                             <td>' . $row['event_start_date'] . '</td>
                                             <td>' . $row['event_end_date'] . '</td>
+                                            <td>' . $row['event_start_time'] . '</td>
+                                            <td>' . $row['event_end_time'] . '</td>
                                             <td>' . $row['event_hall'] . '</td>
                                         </tr>
                                       </tbody>';
@@ -174,9 +178,25 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
 							</div>
 						</div>
                         <div class="col-sm-6">
+                            <div class="form-group">
+                        <label for="event_start_time">Ora început:</label>
+                        <input type="text" name="event_start_time" id="event_start_time" class="form-control" placeholder="Ora început">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                        <label for="event_end_time">Ora sfarsit:</label>
+                        <input type="text" name="event_end_time" id="event_end_time" class="form-control" placeholder="Ora sfarsit">
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
                         <div class="form-group">
                             <label for="event_hall">Numele salii</label>
-                            <input type="text" name="event_hall" id="event_hall" class="form-control" placeholder="Numele salii">
+                            <select name="event_hall" id="event_hall" class="form-control">
+                                <option value="Galla">Galla</option>
+                                <option value="Venue">Venue</option>
+                                <option value="Colloseum">Colloseum</option>
+                            </select>
                         </div>  
 					</div>
                     <div class="row">
@@ -184,13 +204,12 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
                             <div class="form-group">
                                 <label for="event_type">Tipul evenimentului</label>
                                 <select name="event_type" id="event_type" class="form-control">
-                                    <option value="public">Privat</option>
-                                    <option value="privat">Public</option>
+                                    <option value="privat">Privat</option>
+                                    <option value="public">Public</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <p class="text-muted">Salile disponibile sunt: Colloseum, Venue, Galla</p>
                         <div class="col-sm-6">
                         <div class="form-group">
                             <label for="event_number">Numarul de telefon</label>
@@ -274,10 +293,12 @@ function save_evenimente_calendar()
 var event_name=$("#event_name").val();
 var event_start_date=$("#event_start_date").val();
 var event_end_date=$("#event_end_date").val();
+var event_start_time=$("#event_start_time").val();
+var event_end_time=$("#event_end_time").val();
 var event_hall=$("#event_hall").val();
 var event_number=$("#event_number").val();
 var event_type=$("#event_type").val();
-if(event_name=="" || event_start_date=="" || event_end_date=="" || event_hall=="" || event_number=="" || event_type=="")
+if(event_name=="" || event_start_date=="" || event_end_date=="" || event_start_time=="" || event_end_time=="" || event_hall=="" || event_number=="" || event_type=="")
 {
 swal("Introduceti toate detaliile.");
 return false;
@@ -286,7 +307,7 @@ $.ajax({
  url:"save_evenimente_calendar.php",
  type:"POST",
  dataType: 'json',
- data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date,event_hall:event_hall,event_number:event_number,event_type:event_type},
+ data: {event_name:event_name,event_start_date:event_start_date,event_end_date:event_end_date,event_start_time:event_start_time,event_end_time:event_end_time, event_hall:event_hall,event_number:event_number,event_type:event_type},
  success:function(response){
    $('#event_entry_modal').modal('hide');  
    if(response.status == true)

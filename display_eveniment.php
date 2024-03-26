@@ -1,6 +1,6 @@
 <?php                
 require 'database_connection.php'; 
-$display_query = "select event_id,event_name,event_start_date,event_end_date, event_hall, event_number,event_type from calendar_botez_master";             
+$display_query = "select event_id,event_name,event_start_date,event_end_date,event_start_time,event_end_time, event_hall, event_number,event_type from calendar_botez_master";             
 $results = mysqli_query($con,$display_query);   
 $count = mysqli_num_rows($results);  
 if($count>0) 
@@ -10,8 +10,9 @@ if($count>0)
 	while($data_row = mysqli_fetch_array($results, MYSQLI_ASSOC))
 	{
 	$title = $data_row['event_type'] == 'public' ? $data_row['event_name'] : $data_row['event_hall'];
+	$full_title = $title . ' - ' . $data_row['event_start_time'] . '-' . $data_row['event_end_time'];
 	$data_arr[$i]['event_id'] = $data_row['event_id'];
-	$data_arr[$i]['title'] = $title;
+	$data_arr[$i]['title'] = $full_title;
 	$data_arr[$i]['start'] = date("Y-m-d", strtotime($data_row['event_start_date']));
 	$data_arr[$i]['end'] = date("Y-m-d", strtotime($data_row['event_end_date']));
 	$data_arr[$i]['color'] = '#'.substr(uniqid(),-6); // 'green'; pass colour name

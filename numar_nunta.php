@@ -30,7 +30,7 @@ if ($_SESSION['user_name'] == 'admin') {
     // Afișează detaliile
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo "Rezervare : " . $row["event_name"]. " - " . $row["event_start_date"]. " - " . $row["event_end_date"]." - " . $row["event_hall"]." - " . $row["event_number"]."- " . $row["event_type"]."<br>";
+            echo "Rezervare : " . $row["event_name"]. " - " . $row["event_start_date"]. " - " . $row["event_end_date"]." - " .$row["event_start_time"]." - " .$row["event_end_time"]." - " . $row["event_hall"]." - " . $row["event_number"]."- " . $row["event_type"]."<br>";
         }
     } else {
         echo "Nu sunt detalii disponibile.";
