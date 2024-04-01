@@ -89,10 +89,6 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
         padding: 10px; /* Adaugă un spațiu intern de 10 pixeli în jurul navbarului */
         background-color: #FFFFCC;
     }
-    .small-text {
-    font-size: 25px; /* Dimensiunea de font mai mică */
-    font-weight: normal; /* Textul normal, fără îngroșare */
-}
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -106,19 +102,34 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
 </nav>
         </div>
 </div>
-<body>
-    <section class="information">
-    <div class="container">
-        <h2 class="text-center">Informatii despre Aniversare</h2>
-        <?php if ($is_admin): ?>
-            <a href="numar_aniversare.php" style ="outline: none; border:none" class="btn btn-sm btn-primary">Detalii confirmari</a>
-        <?php endif; ?>
-        <h2 class="small-text">Partea de muzica este asigurata de DJ/ formatie, la alegerea dumneavoastra, Nan foto-video se va ocupa de partea de foto-video. Decorul este afisat in pozele de mai jos. Tortul este pregatit felii, iar macheta se alege in functie de dorinta dumneavoastra.<br>
-        Salile disponibile sunt: Colloseum-70 locuri(prima poza), Venue-250 locuri(a doua poza), Galla-150 locuri(a treia poza)
-        </h2>
-    </div>
-</section>
-</script>
+
+<section class="gallery">
+        <div class="container">
+            <h2>Galerie foto</h2>
+            <div class="container-fluid">
+            <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/aniversaree1.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/aniversaree2.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/aniversaree3.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/galerie1aniversare.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/galerie2aniversare.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/galerie3aniversare.jpg" class="img-fluid pb-3">
+            </div>
+        </div>
+        </div>
+    </section>
+    </script>
     <script src='fullcalendar/main.js'></script>
     <script src='fullcalendar/locales-all.js'></script>
     <script src="fullcalendar/calendar-init.js"></script>

@@ -1,6 +1,6 @@
 <?php                
 require 'database_connection.php'; 
-$display_query = "select event_id,event_name,event_start_date,event_end_date,event_start_time,event_end_time,event_hall,event_number,event_type from calendar_botez_master";             
+$display_query = "select event_id,event_name,event_start_date,event_end_date,event_start_time,event_end_time,event_hall,event_number,event_type,event_description from calendar_botez_master";             
 $results = mysqli_query($con,$display_query);   
 $count = mysqli_num_rows($results);  
 if($count>0) 

@@ -1,5 +1,7 @@
 <?php
+include('includes/connect.php');
 session_start();
+
 $is_admin = false; 
 
 if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
@@ -9,7 +11,7 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Aniversare</title>
+    <title>Evenimente publice</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +19,7 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
     <link rel="stylesheet" href="css/style.css">
     <link href='fullcalendar/main.css' rel='stylesheet' />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
@@ -84,41 +86,89 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
         </li>
         </ul>
       </nav>
+<body>
 <style>
     .navbar-container {
         padding: 10px; /* Adaugă un spațiu intern de 10 pixeli în jurul navbarului */
         background-color: #FFFFCC;
     }
-    .small-text {
-    font-size: 25px; /* Dimensiunea de font mai mică */
-    font-weight: normal; /* Textul normal, fără îngroșare */
-}
 </style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
             <div class="navbar-container">
 <nav class="nav flex-column">
-  <a class="nav-link" href="meniu1aniversare.php">Meniu Aniversare</a>
-  <a class="nav-link" href="meniu2aniversare.php">Meniu Majorat</a>
-  <a class="nav-link" href="galeriefotoaniversare.php">Galerie foto</a>
-  <a class="nav-link" href="calendaraniversare.php">Rezervari</a>
+  <a class="nav-link" href="meniu1public.php">Detalii tehnice</a>
+  <a class="nav-link" href="galeriefotopublic.php">Galerie foto</a>
+  <a class="nav-link" href="calendarpublic.php">Rezervari</a>
 </nav>
         </div>
 </div>
 <body>
     <section class="information">
     <div class="container">
-        <h2 class="text-center">Informatii despre Aniversare</h2>
+        <h2 class="text-center">Informatii despre evenimente publice</h2>
         <?php if ($is_admin): ?>
-            <a href="numar_aniversare.php" style ="outline: none; border:none" class="btn btn-sm btn-primary">Detalii confirmari</a>
+            <button id="editButton" style="outline: none; border: none;">Editează</button>
         <?php endif; ?>
-        <h2 class="small-text">Partea de muzica este asigurata de DJ/ formatie, la alegerea dumneavoastra, Nan foto-video se va ocupa de partea de foto-video. Decorul este afisat in pozele de mai jos. Tortul este pregatit felii, iar macheta se alege in functie de dorinta dumneavoastra.<br>
-        Salile disponibile sunt: Colloseum-70 locuri(prima poza), Venue-250 locuri(a doua poza), Galla-150 locuri(a treia poza)
-        </h2>
+        <div id="editContent" contenteditable="false">
+            <?php
+            $config_content = file_get_contents('evenimenteinfo.txt');
+            echo $config_content;
+            ?>
+        <section class="gallery">
+        <div class="container">
+            <h2>Galerie foto</h2>
+            <div class="container-fluid">
+            <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/evenpubl3.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/evenpubl1.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/evenpubl2.jpg" class="img-fluid pb-3">
+            </div>
+        </div>
+        </div>
+    </section>
+        </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var editButton = document.getElementById("editButton");
+        var editContent = document.getElementById("editContent");
+
+        editButton.addEventListener("click", function() {
+            if (editContent.contentEditable === "false") {
+                editContent.contentEditable = "true";
+                editButton.textContent = "Salvează";
+            } else {
+                editContent.contentEditable = "false";
+                editButton.textContent = "Editează";
+                var editedContent = editContent.innerHTML.trim();
+                saveChanges(editedContent);
+            }
+        });
+
+        function saveChanges(content) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "save_evenimente.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Modificările au fost salvate.");
+                }
+            };
+            xhr.send("content=" + encodeURIComponent(content));
+        }
+    });
 </script>
+</script>
+    </section>
     <script src='fullcalendar/main.js'></script>
     <script src='fullcalendar/locales-all.js'></script>
     <script src="fullcalendar/calendar-init.js"></script>

@@ -89,10 +89,6 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
         padding: 10px; /* Adaugă un spațiu intern de 10 pixeli în jurul navbarului */
         background-color: #FFFFCC;
     }
-    .small-text {
-    font-size: 25px; /* Dimensiunea de font mai mică */
-    font-weight: normal; /* Textul normal, fără îngroșare */
-}
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -111,15 +107,65 @@ if (isset($_SESSION['user_name']) && $_SESSION['user_name'] == 'admin') {
     <div class="container">
         <h2 class="text-center">Informatii despre Aniversare</h2>
         <?php if ($is_admin): ?>
-            <a href="numar_aniversare.php" style ="outline: none; border:none" class="btn btn-sm btn-primary">Detalii confirmari</a>
+            <button id="editButton" style="outline: none; border: none;">Editează</button>
         <?php endif; ?>
-        <h2 class="small-text">Partea de muzica este asigurata de DJ/ formatie, la alegerea dumneavoastra, Nan foto-video se va ocupa de partea de foto-video. Decorul este afisat in pozele de mai jos. Tortul este pregatit felii, iar macheta se alege in functie de dorinta dumneavoastra.<br>
-        Salile disponibile sunt: Colloseum-70 locuri(prima poza), Venue-250 locuri(a doua poza), Galla-150 locuri(a treia poza)
-        </h2>
+        <div id="editContent" contenteditable="false">
+            <?php
+            $config_content = file_get_contents('meniu2aniversare.txt');
+            echo $config_content;
+            ?>
+        </div>
     </div>
+    <section class="gallery">
+        <div class="container">
+            <h2>Galerie foto</h2>
+            <div class="container-fluid">
+            <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/meniu2aniversare.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/meniu2aniversare2.jpg" class="img-fluid pb-3">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+            <img src="images/meniu2aniversare3.jpg" class="img-fluid pb-3">
+            </div>
+        </div>
+        </div>
+    </section>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var editButton = document.getElementById("editButton");
+        var editContent = document.getElementById("editContent");
+
+        editButton.addEventListener("click", function() {
+            if (editContent.contentEditable === "false") {
+                editContent.contentEditable = "true";
+                editButton.textContent = "Salvează";
+            } else {
+                editContent.contentEditable = "false";
+                editButton.textContent = "Editează";
+                var editedContent = editContent.innerHTML.trim();
+                saveChanges(editedContent);
+            }
+        });
+
+        function saveChanges(content) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "save_meniu2aniversare.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Modificările au fost salvate.");
+                }
+            };
+            xhr.send("content=" + encodeURIComponent(content));
+        }
+    });
 </script>
-    <script src='fullcalendar/main.js'></script>
+<script src='fullcalendar/main.js'></script>
     <script src='fullcalendar/locales-all.js'></script>
     <script src="fullcalendar/calendar-init.js"></script>
 

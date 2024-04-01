@@ -16,7 +16,7 @@ session_start();
 </head>
 <body style="background-color: #f5deb3;">
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Organizare Evenimente</a>
+  <a class="navbar-brand" href="index.php">Organizare Evenimente</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,15 +31,17 @@ session_start();
           Categorii
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#Botez">Botez</a>
+          <a class="dropdown-item" href="botez.php">Botez</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#Nunta">Nunta</a>
+          <a class="dropdown-item" href="nunta.php">Nunta</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#Aniversare">Aniversare</a>
+          <a class="dropdown-item" href="aniversare.php">Aniversare</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="evenimente_publice.php">Evenimente Publice</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#Contact">Contact</a>
+        <a class="nav-link" href="index.php#Contact">Contact</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#Despre noi">Despre noi</a>
@@ -80,7 +82,7 @@ session_start();
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="images/botez1.jpg" class="d-block w-100" alt="Botez">
+      <img src="images/botez1nou.jpg" class="d-block w-100" alt="Botez">
       <div class="carousel-caption d-none d-md-block">
         <h5>Botez</h5>
       </div>
@@ -216,7 +218,7 @@ session_start();
   <div class="container-fluid">
     <h3 class="text-center">Imperial Events</h3> <br>
     <p class="text-center"><b>Suntem o firma de 10 ani pe piata care se poate ocupa de realizarea evenimentului dumneavoastra. Ne ocupam de rezervare, meniuri , decor, muzica, fotografi, 
-      tort si orice aveti nevoie in plus. Pentru mai multe detalii, puteti accesa fiecare sectiune dupa ce va creati un cont. Pentru detalii suplimentare,
+      tort si orice aveti nevoie in plus. Pentru mai multe detalii, puteti accesa fiecare sectiune. Daca va hotarati si doriti o rezervare, este necesara inregistrarea si ulterior accesarea contului. Pentru detalii suplimentare,
        aveti toate datele noastre de contact in sectiunea "Contact" </b></p>
       </div>
   </section>
